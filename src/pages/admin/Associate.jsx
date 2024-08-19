@@ -15,13 +15,7 @@ import { toast } from "react-toastify";
 import MemberModal from "../../admin/members/memberModal";
 
 const Associate = () => {
-  const { data, isLoading: loading, refetch } = useGetHook(
-    "admin/member/retrieve/all?keyword=associate"
-  );
-  const [items, setItems] = useState([]);
-  const [isBusy, setIsBusy] = useState();
-  const [selected, setSelected] = useState();
-  const [showDetails, setShowDetails] = useState(false)
+  const {data:item, isLoading:loading} = useGetHook('admin/member/retrieve/all?keyword=associate')
 
   const [showAddMemberPopup, setShowAddMemberPopup] = useState(false);
     
@@ -158,7 +152,7 @@ const Associate = () => {
             <ThreeCircles
               height="100"
               width="100"
-              color="#291670"
+              color="#042e46"
               wrapperStyle={{}}
               wrapperClass=""
               visible={true}

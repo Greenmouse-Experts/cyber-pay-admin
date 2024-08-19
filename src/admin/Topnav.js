@@ -69,7 +69,7 @@ export const Topnav = ({ toggleSidebar, data }) => {
           <LuMenu />
         </div>
         <div className="icon_text">
-          <h3>Hello Super Admin</h3>
+          <h3>Hello Admin</h3>
           <p>{formattedDate}</p>
         </div>
       </div>

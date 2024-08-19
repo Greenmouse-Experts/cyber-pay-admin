@@ -15,8 +15,8 @@ function App() {
       <ToastContainer></ToastContainer>
       <BrowserRouter>
         <Routes>
-          <Route path="/" index element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" index element={<AdminLogin />} />
+          <Route path="/login" element={<AdminLogin />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           {/* admin routes */}
           <Route path="" element={<Protect />}>

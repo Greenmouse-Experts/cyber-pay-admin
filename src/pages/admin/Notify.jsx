@@ -5,8 +5,8 @@ import { BsTrash3Fill } from "react-icons/bs";
 import { Circles } from "react-loader-spinner";
 import useGetHook from "../../hook/useGet";
 import usePostHook from "../../hook/usePostRead";
-import {toast} from "react-toastify"
-import {GoBell} from "react-icons/go"
+import { toast } from "react-toastify";
+import { GoBell } from "react-icons/go";
 
 const Notify = ({ datas }) => {
   const formatTimeAgo = (timestamp) => {
@@ -15,20 +15,16 @@ const Notify = ({ datas }) => {
   };
 
   const [activeButton, setActiveButton] = useState("all");
-   const { data, isLoading } = useGetHook("admin/get/all/notifications");
+  const { data, isLoading } = useGetHook("admin/get/all/notifications");
 
-
-   const { handlePost } = usePostHook();
-   const onSuccess = () => {
-     toast.success('Announcement added successfully')
-   }
-   const handleSubmit = async (id) => {
+  const { handlePost } = usePostHook();
+  const onSuccess = () => {
+    toast.success("Announcement added successfully");
+  };
+  const handleSubmit = async (id) => {
     const endpoint = `admin/read/notification?notification_id=${id}`;
-     handlePost(endpoint, `Application/json`, onSuccess)
-   };
-
-      
-   
+    handlePost(endpoint, `Application/json`, onSuccess);
+  };
 
   const [notifications, setNotifications] = useState([]);
 
@@ -67,7 +63,7 @@ const Notify = ({ datas }) => {
             <Circles
               height="80"
               width="80"
-              color="#291670"
+              color="#042e46"
               ariaLabel="circles-loading"
               wrapperStyle={{}}
               wrapperClass=""
@@ -76,7 +72,7 @@ const Notify = ({ datas }) => {
           </div>
         ) : (
           <div className="notify_body">
-            {!!notifications.length && notifications.map((item, index) => (
+            {notifications.map((item, index) => (
                <div
                onClick={() => handleSubmit(item.id)}
                key={item.id}
@@ -91,12 +87,12 @@ const Notify = ({ datas }) => {
                 <div>                  
                   <div >
                     <h3>
-                    {item.body} <span>{item.title}</span>
-                  </h3>
-                  <p>{formatTimeAgo(item.created_at)} ago</p>
-                  </div><BsTrash3Fill />
+                      {item.body} <span>{item.title}</span>
+                    </h3>
+                    <p>{formatTimeAgo(item.created_at)} ago</p>
+                  </div>
+                  <BsTrash3Fill />
                 </div>
-               
               </div>
             ))}
           </div>

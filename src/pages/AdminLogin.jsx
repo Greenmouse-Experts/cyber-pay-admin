@@ -32,7 +32,7 @@ const AdminLogin = () => {
       setIsLoading(true);
       axios
         .post(
-          `${process.env.REACT_APP_API_URL}/auth/admin/login`,
+          "https://cyberpay.victornwadinobi.com/api/admin/login",
           fd,
           {
             headers: {
@@ -42,7 +42,7 @@ const AdminLogin = () => {
         )
         .then((res) => {
           console.log(res);
-          if (res.data.code === 200) {
+          if (res.data.success) {
             toast.success(res.data.message);
             localStorage.setItem("bripan_token", res.data.token);
             usenavigate("/admin/");

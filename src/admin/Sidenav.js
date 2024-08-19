@@ -2,14 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../image/logo.png";
 import { FiSettings, FiLogOut } from "react-icons/fi";
-import { MdOutlineManageAccounts, MdAnnouncement, MdOutlinePayment } from "react-icons/md";
+import {  MdAnnouncement } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { GrTransaction } from "react-icons/gr";
 import {GoBell} from "react-icons/go"
 import { LuLayoutDashboard } from "react-icons/lu";
 import "../stylesheet/component.css";
 import { AiOutlineClose } from "react-icons/ai";
-import useModal from "../hook/useModal";
+import { FaQuestionCircle } from "react-icons/fa";
 
 const Sidebar = ({ showSidebar, toggleSidebar }) => {
   const [showUsersMenu, setShowUsersMenu] = useState(false);
@@ -86,32 +86,22 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
             </NavLink>
           </li>
           <li className="nav-item">
-            <span className="nav-link" onClick={toggleUsersMenu}>
+            <NavLink to="/admin/banner" className="nav-link">
               <span className="nav-icon">
-                <MdOutlineManageAccounts /> {showSidebar && "Members"}
+                <MdAnnouncement />
+                {showSidebar && "Banner"}
               </span>
-              {showSidebar && (
-                <div className="bb">
-                  {showUsersMenu ? <IoIosArrowUp /> : <IoIosArrowDown />}
-                </div>
-              )}
-            </span>
-            {showUsersMenu && (
-              <ul className="submenu">
-                <li className="submenu-item">
-                  <NavLink to="fellow" className="nav-link">
-                    {showSidebar && "Fellow"}
-                  </NavLink>
-                </li>
-                <li className="submenu-item">
-                  <NavLink to="associate" className="nav-link">
-                    {showSidebar && "Associate"}
-                  </NavLink>
-                </li>
-              </ul>
-            )}
+            </NavLink>
           </li>
           <li className="nav-item">
+            <NavLink to="/admin/faq" className="nav-link">
+              <span className="nav-icon">
+                <FaQuestionCircle />
+                {showSidebar && "Faq"}
+              </span>
+            </NavLink>
+          </li>
+          {/* <li className="nav-item">
             <span className="nav-link" onClick={toggleDuesMenu}>
               <span className="nav-icon">
                 <MdOutlinePayment /> {showSidebar && "Dues"}
@@ -141,8 +131,8 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
                 </li>
               </ul>
             )}
-          </li>
-          <li className="nav-item">
+          </li> */}
+          {/* <li className="nav-item">
             <span className="nav-link" onClick={togglePaymentMenu}>
               <span className="nav-icon">
               <GrTransaction /> {showSidebar && "Payments"}
@@ -167,32 +157,32 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
                 </li>
               </ul>
             )}
-          </li>
-          <li className="nav-item">
+          </li> */}
+          {/* <li className="nav-item">
             <NavLink to="/admin/announcements" className="nav-link">
               <span className="nav-icon">
                 <MdAnnouncement />
                 {showSidebar && "Announcement"}
               </span>
             </NavLink>
-          </li>
-          <li className="nav-item">
+          </li> */}
+          {/* <li className="nav-item">
             <NavLink to="notify" className="nav-link">
               <span className="nav-icon">
               <GoBell />
                 {showSidebar && "Notification"}
               </span>
             </NavLink>
-          </li>
-          <li className="nav-item">
+          </li> */}
+          {/* <li className="nav-item">
             <NavLink to="settings" className="nav-link">
               <span className="nav-icon">
                 <FiSettings />
                 {showSidebar && "Settings"}
               </span>
             </NavLink>
-          </li>
-          <li className="nav-item" onClick={() => setShowModal(true)}>
+          </li> */}
+          <li className="nav-item" onClick={handleLogout}>
             <div  className="nav-link">
               <span className="nav-icon">
                 {" "}
