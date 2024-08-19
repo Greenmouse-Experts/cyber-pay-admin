@@ -45,7 +45,7 @@ const Login = () => {
         })
         .then((res) => {
           if (res.data.code === 200) {
-            localStorage.setItem("bripan_token", res.data.token);
+            localStorage.setItem("cyber_token", res.data.token);
             toast.success(res.data.message);
             localStorage.setItem("fName", res.data.data.first_name);
             localStorage.setItem("bripan_sub", res.data.data.isSubscribed);
@@ -56,12 +56,16 @@ const Login = () => {
           }
         })
         .catch((err) => {
-          if(err?.response?.data?.message){
-            toast.error(err?.response?.data?.message)
+          if (err?.response?.data?.message) {
+            toast.error(err?.response?.data?.message);
           }
-          if(err?.response?.data?.errors){Object.entries(err?.response?.data?.errors).forEach(([key, value]) => {
-            toast.error(value[0]);
-          });}
+          if (err?.response?.data?.errors) {
+            Object.entries(err?.response?.data?.errors).forEach(
+              ([key, value]) => {
+                toast.error(value[0]);
+              }
+            );
+          }
         })
         .finally(() => {
           setIsLoading(false);
@@ -85,7 +89,9 @@ const Login = () => {
   return (
     <div className="main_login">
       <form onSubmit={handleSubmit} action="submit" className="login">
-        <a href="https://bripan.org.ng/"><img src={logo} alt="logo" /></a>
+        <a href="https://cyberpay.net.ng">
+          <img src={logo} alt="logo" />
+        </a>
         <div className="log_head">
           <h3>Member Login</h3>
           <p>Fill in your credentials to login to your dashboard</p>

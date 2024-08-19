@@ -73,48 +73,7 @@ export const Topnav = ({ toggleSidebar, data }) => {
           <p>{formattedDate}</p>
         </div>
       </div>
-      <div className="icon_menu">
-        {/* <div className="search">
-          <BiSearch />
-          <input type="text" placeholder="Search" />
-        </div> */}
-        <div ref={bellIconRef} onClick={popup} className="bell">
-          <GoBell />
-          <span>{datas?.data?.length}</span>
-          {activeDropdown && (
-            <div className="bell_drop">
-              <div className="add_head">
-                <p>Recent Notification</p>{" "}
-              </div>
-              {datas?.data.length > 0 ? (
-                datas.data.map((item) => (
-                  <div key={item.id}>
-                    <div className="bell_body">
-                      <GoBell />
-                      <div>
-                        <h3>
-                          {item.body} <span>{item.title}</span>
-                        </h3>
-                        <p>{formatTimeAgo(item.created_at)} ago</p>{" "}
-                      </div>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div>
-                  {" "}
-                  <div className="add_head">
-                    <p>Recent Notification</p>{" "}
-                  </div>{" "}
-                  <p className="no_body">No Notifications</p>
-                </div>
-              )}
-              <Link to="notify">View Details</Link>
-            </div>
-          )}
-        </div>
-        <img src={data?.avatar || user} alt="profile" />
-      </div>
+     
     </div>
   );
 };

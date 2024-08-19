@@ -2,7 +2,7 @@ import axios from "axios";
 import { getLocalToken } from "./helpers";
 
 const requestAutorization = () => {
-  const token = getLocalToken("bripan_token");
+  const token = getLocalToken("cyber_token");
   return `Bearer ${token}`;
 };
 console.log(requestAutorization());

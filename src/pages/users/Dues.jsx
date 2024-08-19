@@ -8,7 +8,7 @@ import useModal from "../../hook/useModal";
 import UploadReceipt from "../../users/UploadReceipt";
 import usePostHook from "../../hook/usePost";
 import { toast } from "react-toastify";
-import { usePaystackPayment } from "react-paystack";
+
 
 const MembersDues = () => {
   const { data: due, loading, refetch } = useGetHook("member/payments");
@@ -61,14 +61,12 @@ const MembersDues = () => {
       amount: Number(item?.amount) * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
       publicKey: `pk_test_77297b93cbc01f078d572fed5e2d58f4f7b518d7`,
     };
-    const initializePayment = usePaystackPayment(config);
+   
     return (
       <div>
         <p
           className="flex cursor-pointer bg-blue-900 text-white justify-center py-1 rounded-lg gap-x-2 items-center"
-          onClick={() => {
-            initializePayment(onSuccess, onClose);
-          }}
+         
         >
           <RiSecurePaymentFill />
           Pay Now

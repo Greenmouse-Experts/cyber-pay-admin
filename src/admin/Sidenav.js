@@ -2,21 +2,23 @@ import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../image/logo.png";
 import { FiSettings, FiLogOut } from "react-icons/fi";
-import {  MdAnnouncement } from "react-icons/md";
+import { MdAnnouncement } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { GrTransaction } from "react-icons/gr";
-import {GoBell} from "react-icons/go"
+import { GoBell } from "react-icons/go";
 import { LuLayoutDashboard } from "react-icons/lu";
 import "../stylesheet/component.css";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaQuestionCircle } from "react-icons/fa";
+import useModal from "../hook/useModal";
+import { PiCertificate } from "react-icons/pi";
 
 const Sidebar = ({ showSidebar, toggleSidebar }) => {
   const [showUsersMenu, setShowUsersMenu] = useState(false);
-  const [duesMenu, setDuesMenu] = useState(false)
-  const [payments, setPayments] = useState(false)
-  const navigate = useNavigate()
-  const {Modal, setShowModal} = useModal()
+  const [duesMenu, setDuesMenu] = useState(false);
+  const [payments, setPayments] = useState(false);
+  const navigate = useNavigate();
+  const { Modal, setShowModal } = useModal();
   const toggleUsersMenu = () => {
     if (showSidebar) {
       setShowUsersMenu(!showUsersMenu);
@@ -62,7 +64,7 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate('/admin/login')
+    navigate("/admin/login");
   };
 
   return (
@@ -71,20 +73,22 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
       className={showSidebar ? "sidebar" : "sidebar closed"}
     >
       <div className={showSidebar ? "side_img" : "img-side"}>
-      <a href="https://bripan.org.ng/"><img className="img-logo" src={logo} alt="Logo" /></a>{" "}
+        <a href="https://cyberpay.net.ng">
+          <img className="img-logo" src={logo} alt="Logo" />
+        </a>{" "}
         <div className="men" onClick={toggleSidebar}>
           <AiOutlineClose />
         </div>
       </div>
       <nav className={`side-nav ${showSidebar ? "active" : ""}`}>
         <ul className="nav-list">
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <NavLink to="/admin/" className="nav-link">
               <span className="nav-icon">
                 <LuLayoutDashboard /> {showSidebar && "Dashboard"}
               </span>
             </NavLink>
-          </li>
+          </li> */}
           <li className="nav-item">
             <NavLink to="/admin/banner" className="nav-link">
               <span className="nav-icon">
@@ -98,6 +102,14 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
               <span className="nav-icon">
                 <FaQuestionCircle />
                 {showSidebar && "Faq"}
+              </span>
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/admin/certification" className="nav-link">
+              <span className="nav-icon">
+              <PiCertificate />
+                {showSidebar && "Certification"}
               </span>
             </NavLink>
           </li>
@@ -183,7 +195,7 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
             </NavLink>
           </li> */}
           <li className="nav-item" onClick={handleLogout}>
-            <div  className="nav-link">
+            <div className="nav-link">
               <span className="nav-icon">
                 {" "}
                 <FiLogOut /> {showSidebar && "Logout"}
@@ -192,12 +204,22 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
           </li>
         </ul>
       </nav>
-      <Modal title={''} noHead>
+      <Modal title={""} noHead>
         <div className="p-5">
           <p className="text-center">Are you sure you want to logout?</p>
           <div className="mt-6 flex items-center justify-between">
-            <button className="px-5 py-2 bg-red-500 rounded text-white" onClick={() => setShowModal(false)}>Cancel</button>
-            <button className="px-5 py-2 bg-blue-900 rounded text-white" onClick={handleLogout}>Logout</button>
+            <button
+              className="px-5 py-2 bg-red-500 rounded text-white"
+              onClick={() => setShowModal(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className="px-5 py-2 bg-blue-900 rounded text-white"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           </div>
         </div>
       </Modal>

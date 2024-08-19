@@ -15,15 +15,23 @@ import { toast } from "react-toastify";
 import MemberModal from "../../admin/members/memberModal";
 
 const Associate = () => {
-  const {data:item, isLoading:loading} = useGetHook('admin/member/retrieve/all?keyword=associate')
+  const {
+    data,
+    isLoading: loading,
+    refetch,
+  } = useGetHook("admin/member/retrieve/all?keyword=associate");
+  const [items, setItems] = useState([]);
+  const [isBusy, setIsBusy] = useState();
+  const [selected, setSelected] = useState();
+  const [showDetails, setShowDetails] = useState(false);
 
   const [showAddMemberPopup, setShowAddMemberPopup] = useState(false);
-    
+
   useEffect(() => {
-    if(data){
-      setItems(data?.data.data)
+    if (data) {
+      setItems(data?.data.data);
     }
-  }, [data])
+  }, [data]);
   const handleAddMemberClick = () => {
     setShowAddMemberPopup(true);
   };
@@ -47,14 +55,14 @@ const Associate = () => {
         ],
       ],
       body: data?.data?.data.map((item, index) => [
-          index + 1,
-          item.membership_id,
-          `${item.first_name} ${item.last_name}`,
-          item.email,
-          item.state,
-          dayjs(item.created_at).format("DD-MMM -YYYY"),
-          item.status,
-        ]),
+        index + 1,
+        item.membership_id,
+        `${item.first_name} ${item.last_name}`,
+        item.email,
+        item.state,
+        dayjs(item.created_at).format("DD-MMM -YYYY"),
+        item.status,
+      ]),
     });
 
     doc.save("members.pdf");
@@ -72,14 +80,14 @@ const Associate = () => {
   const openDetails = (item) => {
     setSelected(item);
     setShowDetails(true);
-  }
+  };
   // change account status
   const ChangeAccountStatus = async (status) => {
     try {
       const config = {
         headers: {
           "Content-Type": "Application/json",
-          authorization: `Bearer ${localStorage.getItem("bripan_token")}`,
+          authorization: `Bearer ${localStorage.getItem("cyber_token")}`,
         },
       };
       const res = await axios.get(
@@ -88,10 +96,10 @@ const Associate = () => {
       );
       const data = res.data;
       setIsBusy(false);
-      toast.success(data.message)
-      refetch()
-      ShowActivate(false)
-      ShowDeactivate(false)
+      toast.success(data.message);
+      refetch();
+      ShowActivate(false);
+      ShowDeactivate(false);
     } catch (error) {
       setIsBusy(false);
     }
@@ -99,13 +107,15 @@ const Associate = () => {
 
   // handle search
   const handleSearch = (e) => {
-    if(e.target.value === ""){
-      setItems(data.data.data)
-    }else{
-      const filtered = data.data.data.filter((item) => item.first_name.toLowerCase().includes(e.target.value.toLowerCase()))
-      setItems(filtered)
+    if (e.target.value === "") {
+      setItems(data.data.data);
+    } else {
+      const filtered = data.data.data.filter((item) =>
+        item.first_name.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      setItems(filtered);
     }
-  }
+  };
 
   return (
     <div className="px-4">
@@ -114,7 +124,7 @@ const Associate = () => {
           <div className="leftt">
             <h3 className="text-2xl font-semibold">Associate Members</h3>
             <svg
-            onClick={downloadAsPDF}
+              onClick={downloadAsPDF}
               xmlns="http://www.w3.org/2000/svg"
               width="25"
               height="25"
@@ -140,7 +150,11 @@ const Associate = () => {
               <BiPlus /> Add New
             </button>
             <div className="searchh">
-              <input type="text" placeholder="Search by name" onChange={handleSearch}/>
+              <input
+                type="text"
+                placeholder="Search by name"
+                onChange={handleSearch}
+              />
               <span>
                 <BiSearch />
               </span>
@@ -221,74 +235,77 @@ const Associate = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {!!items.length && items?.map((item, i) => (
-                      <tr key={i}>
-                        <td className="align-middle fs-500 whitespace-nowrap px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
-                          {i + 1}
-                        </td>
-                        <td className="align-middle fs-500  px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
-                          <div className="font-semibold  text-blue-900">
-                            {item.membership_id}
-                          </div>
-                        </td>
-                        <td className="align-middle fs-500 whitespace-nowrap px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
-                          {item.first_name} {item.last_name}
-                        </td>
-                        <td className="align-middle fs-500 whitespace-nowrap px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
-                          {item.email}
-                        </td>
-                        <td className="align-middle fs-500 whitespace-nowrap px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
-                          <div className="flex items-center gap-x-3">
-                            <div
-                              className={`px-2 py-1 rounded font-semibold border ${
-                                item.status === "Pending" || item.status === "Inactive"
-                                  ? `bg-orange-100`
-                                  : `bg-blue-200`
-                              }`}
-                            >
-                              {item.status}
+                    {!!items.length &&
+                      items?.map((item, i) => (
+                        <tr key={i}>
+                          <td className="align-middle fs-500 whitespace-nowrap px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
+                            {i + 1}
+                          </td>
+                          <td className="align-middle fs-500  px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
+                            <div className="font-semibold  text-blue-900">
+                              {item.membership_id}
                             </div>
-                            {item.status === "Pending" || item.status === "Inactive"  ? (
-                              <span
-                                className="underline cursor-pointer font-medium text-blue-900"
-                                onClick={() => openActivate(item)}
+                          </td>
+                          <td className="align-middle fs-500 whitespace-nowrap px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
+                            {item.first_name} {item.last_name}
+                          </td>
+                          <td className="align-middle fs-500 whitespace-nowrap px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
+                            {item.email}
+                          </td>
+                          <td className="align-middle fs-500 whitespace-nowrap px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
+                            <div className="flex items-center gap-x-3">
+                              <div
+                                className={`px-2 py-1 rounded font-semibold border ${
+                                  item.status === "Pending" ||
+                                  item.status === "Inactive"
+                                    ? `bg-orange-100`
+                                    : `bg-blue-200`
+                                }`}
                               >
-                                Activate
+                                {item.status}
+                              </div>
+                              {item.status === "Pending" ||
+                              item.status === "Inactive" ? (
+                                <span
+                                  className="underline cursor-pointer font-medium text-blue-900"
+                                  onClick={() => openActivate(item)}
+                                >
+                                  Activate
+                                </span>
+                              ) : (
+                                <span
+                                  className="underline cursor-pointer font-medium text-red-800"
+                                  onClick={() => openDeactivate(item)}
+                                >
+                                  Deactivate
+                                </span>
+                              )}
+                            </div>
+                          </td>
+                          <td className="align-middle fs-500 whitespace-nowrap px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
+                            {item?.isSubscribed === "0" ? (
+                              <span className="px-2 py-1 text-sm bg-orange-100 font-medium rounded-lg">
+                                Unsubscribed
                               </span>
                             ) : (
-                              <span
-                                className="underline cursor-pointer font-medium text-red-800"
-                                onClick={() => openDeactivate(item)}
-                              >
-                                Deactivate
+                              <span className="px-2 py-1 text-sm bg-green-100 font-medium rounded-lg">
+                                Subscribed
                               </span>
                             )}
-                          </div>
-                        </td>
-                        <td className="align-middle fs-500 whitespace-nowrap px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
-                          {item?.isSubscribed === "0" ? (
-                            <span className="px-2 py-1 text-sm bg-orange-100 font-medium rounded-lg">
-                              Unsubscribed
-                            </span>
-                          ) : (
-                            <span className="px-2 py-1 text-sm bg-green-100 font-medium rounded-lg">
-                              Subscribed
-                            </span>
-                          )}
-                        </td>
-                        <td className="align-middle fs-500 whitespace-nowrap px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
-                          {dayjs(item.created_at).format("DD-MMM -YYYY")}
-                        </td>
-                        <td className="align-middle fs-500 whitespace-nowrap px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
-                          <div className="flex gap-x-3">
-                            <BsEyeFill
-                              onClick={() => openDetails(item)}
-                              className="text-xl text-blue-900"
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
+                          </td>
+                          <td className="align-middle fs-500 whitespace-nowrap px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
+                            {dayjs(item.created_at).format("DD-MMM -YYYY")}
+                          </td>
+                          <td className="align-middle fs-500 whitespace-nowrap px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
+                            <div className="flex gap-x-3">
+                              <BsEyeFill
+                                onClick={() => openDetails(item)}
+                                className="text-xl text-blue-900"
+                              />
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </div>
@@ -301,9 +318,9 @@ const Associate = () => {
           <AddAssociate onClose={handleCloseAddMemberPopup} />
         </div>
       )}
-      {
-        showDetails && <MemberModal item={selected} close={() => setShowDetails(false)}/>
-      }
+      {showDetails && (
+        <MemberModal item={selected} close={() => setShowDetails(false)} />
+      )}
       <Activate title={""} noHead>
         <ReusableModal
           title={"Are you sure you want to activate this account?"}

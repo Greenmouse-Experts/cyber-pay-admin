@@ -1,5 +1,5 @@
 import React from "react";
-import { usePaystackPayment } from "react-paystack";
+
 import useGetHook from "../hook/useGet";
 import usePostHook from "../hook/usePost";
 import { toast } from "react-toastify";
@@ -35,14 +35,12 @@ const SubscribeModal = () => {
     console.log("closed");
   };
   const PaystackHookButton = () => {
-    const initializePayment = usePaystackPayment(config);
+   
     return (
       <div>
         <button
           className="bg-blue-900 text-white font-semibold px-6 py-2 rounded-lg"
-          onClick={() => {
-            initializePayment(onSuccess, onClose);
-          }}
+      
         >
           Subscribe Now
         </button>

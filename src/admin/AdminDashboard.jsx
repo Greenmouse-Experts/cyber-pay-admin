@@ -17,6 +17,7 @@ import SubscriptionPayments from "../pages/admin/Payments/Subscription";
 import SettingsPage from "../pages/admin/Settings";
 import AdminBanner from "../pages/admin/Banner";
 import AdminFaq from "../pages/admin/Faq";
+import AdminCertificate from "../pages/admin/Certificate";
 
 const AdminDashboard = () => {
   const [showSidebar, setShowSidebar] = useState(window.innerWidth >= 650);
@@ -51,7 +52,7 @@ const AdminDashboard = () => {
             {/* <Route path="associate" element={<Associate />} /> */}
             <Route path="faq" element={<AdminFaq />} />
             <Route path="banner" element={<AdminBanner />} />
-            <Route path="notify" element={<Notify datas={data?.data} />} />
+            <Route path="certification" element={<AdminCertificate/>} />
             <Route path="dues/list" element={<AdminDues />} />
             <Route path="dues/bank" element={<AdminBanks />} />
             <Route path="dues/category" element={<AdminDuesCategory />} />

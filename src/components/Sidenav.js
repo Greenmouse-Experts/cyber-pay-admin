@@ -21,7 +21,7 @@ import useModal from "../hook/useModal";
 const Sidebar = ({ showSidebar, toggleSidebar }) => {
   const [showUsersMenu, setShowUsersMenu] = useState(false);
   // const [showInventoriesMenu, setShowInventoriesMenu] = useState(false);
-  const {Modal, setShowModal} = useModal()
+  const { Modal, setShowModal } = useModal();
   const toggleUsersMenu = () => {
     if (showSidebar) {
       setShowUsersMenu(!showUsersMenu);
@@ -72,7 +72,9 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
       className={showSidebar ? "sidebar" : "sidebar closed"}
     >
       <div className={showSidebar ? "side_img" : "img-side"}>
-      <a href="https://bripan.org.ng/"><img className="img-logo" src={logo} alt="Logo" /></a>{" "}
+        <a href="https://cyberpay.net.ng">
+          <img className="img-logo" src={logo} alt="Logo" />
+        </a>{" "}
         <div className="men" onClick={toggleSidebar}>
           <AiOutlineClose />
         </div>
@@ -136,12 +138,22 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
           </li>
         </ul>
       </nav>
-      <Modal title={''} noHead>
+      <Modal title={""} noHead>
         <div className="p-5">
           <p className="text-center">Are you sure you want to logout?</p>
           <div className="mt-6 flex items-center justify-between">
-            <button className="px-5 py-2 bg-red-500 rounded text-white" onClick={() => setShowModal(false)}>Cancel</button>
-            <button className="px-5 py-2 bg-blue-900 rounded text-white" onClick={handleLogOut}>Logout</button>
+            <button
+              className="px-5 py-2 bg-red-500 rounded text-white"
+              onClick={() => setShowModal(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className="px-5 py-2 bg-blue-900 rounded text-white"
+              onClick={handleLogOut}
+            >
+              Logout
+            </button>
           </div>
         </div>
       </Modal>
