@@ -18,9 +18,15 @@ const usePostHook = () => {
       );
       success();
     } catch (error) {
-      Object.entries(error?.response?.data?.errors).forEach(([key, value]) => {
-        toast.error(value[0]);
-      });
+      if (error?.response?.data?.errors) {
+        Object.entries(error?.response?.data?.errors).forEach(
+          ([key, value]) => {
+            toast.error(value[0]);
+          }
+        );
+      }else{
+        toast.error("An error occurred while processing your request.");
+      }
     }
   }, []);
   return { handlePost };

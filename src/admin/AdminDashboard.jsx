@@ -9,15 +9,18 @@ import Fellow from "../pages/admin/Fellow";
 import Associate from "../pages/admin/Associate";
 import Notify from "../pages/admin/Notify";
 
-import AdminBanks from "../pages/admin/Faq";
-import AdminDuesCategory from "../pages/admin/Dues/Category";
-import AdminDues from "../pages/admin/Dues/Dues";
 import DuesPayments from "../pages/admin/Payments/Dues";
 import SubscriptionPayments from "../pages/admin/Payments/Subscription";
 import SettingsPage from "../pages/admin/Settings";
 import AdminBanner from "../pages/admin/Banner";
 import AdminFaq from "../pages/admin/Faq";
 import AdminCertificate from "../pages/admin/Certificate";
+import AdminAdvert from "../pages/admin/Advert.jsx";
+import AdminContact from "../pages/admin/Contact.jsx";
+import AdminBreadCrumb from "../pages/admin/BreadCrumb.jsx";
+import AdminStory   from "../pages/admin/Story.jsx"
+import AdminPeople   from "../pages/admin/People.jsx"
+import AdminCareer from "../pages/admin/CareerRoles.jsx";
 
 const AdminDashboard = () => {
   const [showSidebar, setShowSidebar] = useState(window.innerWidth >= 650);
@@ -53,9 +56,13 @@ const AdminDashboard = () => {
             <Route path="faq" element={<AdminFaq />} />
             <Route path="banner" element={<AdminBanner />} />
             <Route path="certification" element={<AdminCertificate/>} />
-            <Route path="dues/list" element={<AdminDues />} />
-            <Route path="dues/bank" element={<AdminBanks />} />
-            <Route path="dues/category" element={<AdminDuesCategory />} />
+            <Route path="advert" element={<AdminAdvert/>} />
+            <Route path="contact" element={<AdminContact/>} />
+            <Route path="breadcrumb" element={<AdminBreadCrumb/>} />
+            <Route path="pages/story" element={<AdminStory />} />
+            <Route path="pages/people" element={<AdminPeople />} />
+            <Route path="careers/add" element={<AdminCareer />} />
+            <Route path="careers/view" element={<AdminCareer />} />
             <Route
               path="payments/subscrition"
               element={<SubscriptionPayments />}

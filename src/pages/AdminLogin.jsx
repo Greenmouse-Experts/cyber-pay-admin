@@ -31,7 +31,7 @@ const AdminLogin = () => {
       });
       setIsLoading(true);
       axios
-        .post("https://cyberpay.victornwadinobi.com/api/admin/login", fd, {
+        .post("https://cyberpay.greenmouseonline.com/api/admin/login", fd, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

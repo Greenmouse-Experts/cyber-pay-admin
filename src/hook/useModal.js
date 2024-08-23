@@ -16,7 +16,7 @@ const useModal = () => {
             onClick={() => setShowModal(false)}
           >
             <div
-              className={`rounded shade bg-white ${
+              className={`rounded shade bg-white max-h-[90vh] overflow-y-scroll  ${
                 noHead
                   ? "w-11/12 md:w-6/12 lg:w-4/12 xl:w-3/12"
                   : "w-11/12 md:w-8/12 lg:w-6/12 xl:w-5/12"

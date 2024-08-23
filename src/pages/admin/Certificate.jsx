@@ -46,7 +46,7 @@ const AdminCertificate = () => {
   const handleDelete = () => {
     setIsBusy(true);
     const payload = {
-      banner_id: selected.id,
+      cl_id: selected.id,
     };
     handlePost(`admin/banner/delete`, payload, `application/json`, onSuccess);
   };
@@ -78,7 +78,7 @@ const AdminCertificate = () => {
                   key={i}
                 >
                   <div className="flex items-center gap-x-5">
-                    <div className="bg-blue-900 py-3 px-4">
+                    <div className="bg-white py-3 px-4">
                       <img src={item.image} alt="" className="w-40 h-40 object-cover object-center" />
                     </div>
                    

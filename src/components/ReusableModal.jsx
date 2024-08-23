@@ -11,7 +11,7 @@ const ReusableModal = ({
   return (
     <div>
       <div className="px-6 text-center">{title}</div>
-      <div className="w-full mt-8 flex justify-between">
+      <div className="w-full mt-8 flex justify-between gap-6">
         <button
           className="py-2 px-3 lg:px-6 rounded bg-red-600 text-white"
           onClick={closeModal}

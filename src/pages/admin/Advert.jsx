@@ -10,14 +10,18 @@ import dayjs from "dayjs";
 import ReusableModal from "../../components/ReusableModal";
 import usePostHook from "../../hook/usePost";
 import { toast } from "react-toastify";
-import AddBanner from "../../admin/banner/AddBanner";
-import EditBanner from "../../admin/banner/EditBanner";
-import ViewBanner from "../../admin/banner/ViewBanner";
 
-const AdminBanner = () => {
+import AddCertificate from "../../admin/certificate/AddCertificate";
+
+import EditCertificate from "../../admin/certificate/EditCertificate";
+import ViewCertificate from "../../admin/certificate/ViewCertificate";
+import AddAdvert from "../../admin/Advert/AddAdvert";
+import EditAdvert from "../../admin/Advert/EditAdvert";
+
+const AdminAdvert = () => {
   const [selected, setSelected] = useState();
   const [isBusy, setIsBusy] = useState(false);
-  const { data, loading, refetch } = useGetHook("admin/banners");
+  const { data, loading, refetch } = useGetHook("admin/ads/banners");
   const { handlePost } = usePostHook();
   const { Modal, setShowModal } = useModal();
   const { Modal: Delete, setShowModal: showDelete } = useModal();
@@ -38,7 +42,7 @@ const AdminBanner = () => {
   const onSuccess = () => {
     setIsBusy(false);
     refetch();
-    toast.success("Banner deleted successfully");
+    toast.success("Ads deleted successfully");
     showDelete(false);
   };
   const handleDelete = () => {
@@ -49,13 +53,13 @@ const AdminBanner = () => {
     handlePost(`admin/banner/delete`, payload, `application/json`, onSuccess);
   };
 
-
+  console.log(data?.data?.length);
 
   return (
     <>
       <div className="p-6 bg-white min-h-screen m-2">
         <div className="flex items-center justify-between px-4">
-          <p className="text-2xl font-semibold">Banner</p>
+          <p className="text-2xl font-semibold">Adverts</p>
           <button
             className="flex items-center  gap-x-2 p-2 px-4 text-blue-900 font-semibold border border-blue-900 rounded"
             onClick={() => setShowModal(true)}
@@ -79,15 +83,7 @@ const AdminBanner = () => {
                     <div className="bg-blue-900 py-3 px-4">
                       <img src={item.image} alt="" className="w-40 h-40 object-cover object-center" />
                     </div>
-                    <div>
-                      <h5 className="font-semibold">
-                        {" "}
-                       {formatString(item.title, 40)}
-                      </h5>
-                      <p className="py-2">
-                        {formatString(item.description, 60)}
-                      </p>
-                    </div>
+                   
                   </div>
                   <div
                     className="pr-6 flex gap-x-2"
@@ -104,18 +100,18 @@ const AdminBanner = () => {
           </div>
         )}
       </div>
-      <Modal title={"Add Banner"}>
-        <AddBanner close={() => setShowModal(false)} refetch={refetch} />
+      <Modal title={"Add Advert"}>
+        <AddAdvert close={() => setShowModal(false)} refetch={refetch} />
       </Modal>
       <View title="View">
-        <ViewBanner
+        <ViewCertificate
           close={() => setShowModal(false)}
           item={selected}
           openEdit={openEdit}
         />
       </View>
-      <Edit title={"Edit Banner"}>
-        <EditBanner
+      <Edit title={"Edit Advert"}>
+        <EditAdvert
           item={selected}
           refetch={refetch}
           close={() => showEdit(false)}
@@ -123,7 +119,7 @@ const AdminBanner = () => {
       </Edit>
       <Delete title="" noHead>
         <ReusableModal
-          title="Are you sure you want to delete this banner?"
+          title="Are you sure you want to delete this ads?"
           cancelTitle="No, cancel"
           actionTitle="Yes, delete"
           closeModal={() => showDelete(false)}
@@ -135,4 +131,4 @@ const AdminBanner = () => {
   );
 };
 
-export default AdminBanner;
+export default AdminAdvert;

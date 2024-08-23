@@ -7,7 +7,8 @@ import useGetHook from "../hook/useGet";
 import dayjs from "dayjs";
 import { formatAsNgnMoney } from "../services/helpers";
 import MembersJoined from "./charts/membersJoined";
-import DuesPayment from "./charts/duesPayment";
+import { IoIosArrowDown } from "react-icons/io";
+import Analytics from "./charts/GoogleAnalytics";
 // eslint-disable-next-line
 
 const Admin = () => {
@@ -38,19 +39,28 @@ const Admin = () => {
     },
   ];
 
+  const dummyAnalyticsData = [
+    { month: 'January', pageViews: 1200, sessions: 800, users: 600 },
+    { month: 'February', pageViews: 1500, sessions: 1000, users: 750 },
+    { month: 'March', pageViews: 1800, sessions: 1200, users: 900 },
+    { month: 'April', pageViews: 2200, sessions: 1600, users: 1200 },
+    { month: 'May', pageViews: 2500, sessions: 1800, users: 1350 },
+    { month: 'June', pageViews: 2700, sessions: 2000, users: 1500 },
+    { month: 'July', pageViews: 3000, sessions: 2200, users: 1650 },
+    { month: 'August', pageViews: 3300, sessions: 2500, users: 1800 },
+    { month: 'September', pageViews: 3600, sessions: 2700, users: 1950 },
+    { month: 'October', pageViews: 3900, sessions: 3000, users: 2100 },
+    { month: 'November', pageViews: 4200, sessions: 3200, users: 2250 },
+    { month: 'December', pageViews: 4500, sessions: 3500, users: 2400 },
+  ];
+
   return (
     <div className="home">
-      <div className="home_top">
+      {/* <div className="home_top">
         {" "}
         <div className="bg-white p-6 w-[99%] lg:w-[70%]">
           <div className="head_table">
             <p className="text-xl font-semibold">Recent Members</p>
-            {/* <div className="searchh">
-              <input type="text" placeholder="Search by name" />
-              <span>
-                <BiSearch />
-              </span>
-            </div> */}
           </div>
           <div className="w-full overflow-x-auto">
           <table className="overflow-x-auto">
@@ -102,28 +112,28 @@ const Admin = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
       <div className="home_bottom">
         <div className="l">
           <div className="line">
             <div className="flex justify-between mb-4">
-              <h2 className="font-semibold text-xl">Monthly Payment Dues</h2>
-              {/* <button className="flex items-center gap-x-2 bg-blue-900 text-white px-2 py-1 rounded-lg">
+              <h2 className="font-semibold text-xl">Analytics</h2>
+              <button className="flex items-center gap-x-2 bg-blue-900 text-white px-2 py-1 rounded-lg">
                 Monthly (2023){" "}
                 <span>
                   <IoIosArrowDown />
                 </span>
-              </button> */}
+              </button>
             </div>
-            {user && <DuesPayment data={user?.data?.usersPayments}/>}
+            {dummyAnalyticsData && <Analytics data={dummyAnalyticsData} />}
           </div>
         </div>
-        <div className="b">
+        {/* <div className="b">
           <div className="bar">
-            <h2 className="font-semibold mb-2">Monthly Members joined</h2>{" "}
+            <h2 className="font-semibold mb-2">Analytics</h2>{" "}
             {user && <MembersJoined className="v" data={user?.data?.monthly_members_joined} />}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -13,11 +13,15 @@ import { toast } from "react-toastify";
 import AddBanner from "../../admin/banner/AddBanner";
 import EditBanner from "../../admin/banner/EditBanner";
 import ViewBanner from "../../admin/banner/ViewBanner";
+import AddBreadCrumb from "../../admin/breadCrumb/AddBreadCrumb";
+import ViewBreadrumb from "../../admin/breadCrumb/ViewBreadCrumb";
+import EditBreadCrumb from "../../admin/breadCrumb/EditBreadCrumb";
+import { NavLink } from "react-router-dom";
 
-const AdminBanner = () => {
+const AdminBreadCrumb = () => {
   const [selected, setSelected] = useState();
   const [isBusy, setIsBusy] = useState(false);
-  const { data, loading, refetch } = useGetHook("admin/banners");
+  const { data, loading, refetch } = useGetHook("admin/breadcrumbs");
   const { handlePost } = usePostHook();
   const { Modal, setShowModal } = useModal();
   const { Modal: Delete, setShowModal: showDelete } = useModal();
@@ -38,15 +42,15 @@ const AdminBanner = () => {
   const onSuccess = () => {
     setIsBusy(false);
     refetch();
-    toast.success("Banner deleted successfully");
+    toast.success("Breadcrumb deleted successfully");
     showDelete(false);
   };
   const handleDelete = () => {
     setIsBusy(true);
     const payload = {
-      banner_id: selected.id,
+      breadcrumb_id: selected.id,
     };
-    handlePost(`admin/banner/delete`, payload, `application/json`, onSuccess);
+    handlePost(`admin/breadcrumb/delete`, payload, `application/json`, onSuccess);
   };
 
 
@@ -55,7 +59,7 @@ const AdminBanner = () => {
     <>
       <div className="p-6 bg-white min-h-screen m-2">
         <div className="flex items-center justify-between px-4">
-          <p className="text-2xl font-semibold">Banner</p>
+          <p className="text-2xl font-semibold">Breadcrumbs</p>
           <button
             className="flex items-center  gap-x-2 p-2 px-4 text-blue-900 font-semibold border border-blue-900 rounded"
             onClick={() => setShowModal(true)}
@@ -76,7 +80,7 @@ const AdminBanner = () => {
                   key={i}
                 >
                   <div className="flex items-center gap-x-5">
-                    <div className="bg-blue-900 py-3 px-4">
+                    <div className="bg-white py-3 px-4">
                       <img src={item.image} alt="" className="w-40 h-40 object-cover object-center" />
                     </div>
                     <div>
@@ -85,7 +89,12 @@ const AdminBanner = () => {
                        {formatString(item.title, 40)}
                       </h5>
                       <p className="py-2">
-                        {formatString(item.description, 60)}
+                        {formatString(item.subtitle, 60)}
+                      </p>
+                      <p>
+                        <NavLink className="text-red-600 underline" to={`https://cyberpay-staging.netlify.app${item.link}`}>
+                        {`https://cyberpay-staging.netlify.app${item.link}`}
+                        </NavLink>
                       </p>
                     </div>
                   </div>
@@ -104,18 +113,18 @@ const AdminBanner = () => {
           </div>
         )}
       </div>
-      <Modal title={"Add Banner"}>
-        <AddBanner close={() => setShowModal(false)} refetch={refetch} />
+      <Modal title={"Add Breadcrumb"}>
+        <AddBreadCrumb close={() => setShowModal(false)} refetch={refetch} />
       </Modal>
       <View title="View">
-        <ViewBanner
+        <ViewBreadrumb
           close={() => setShowModal(false)}
           item={selected}
           openEdit={openEdit}
         />
       </View>
-      <Edit title={"Edit Banner"}>
-        <EditBanner
+      <Edit title={"Edit Breadcrumb"}>
+        <EditBreadCrumb
           item={selected}
           refetch={refetch}
           close={() => showEdit(false)}
@@ -123,7 +132,7 @@ const AdminBanner = () => {
       </Edit>
       <Delete title="" noHead>
         <ReusableModal
-          title="Are you sure you want to delete this banner?"
+          title="Are you sure you want to delete this breadcrumb?"
           cancelTitle="No, cancel"
           actionTitle="Yes, delete"
           closeModal={() => showDelete(false)}
@@ -135,4 +144,4 @@ const AdminBanner = () => {
   );
 };
 
-export default AdminBanner;
+export default AdminBreadCrumb;
