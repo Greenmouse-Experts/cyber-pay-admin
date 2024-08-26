@@ -163,6 +163,27 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
                   </NavLink>
                 </li>
                 <li className="submenu-item">
+                  <NavLink to="pages/people" className="nav-link">
+                    {showSidebar && "About Us"}
+                  </NavLink>
+                </li>
+                <li className="submenu-item">
+                  <NavLink to="pages/whycyberpay" className="nav-link">
+                    {showSidebar && "WhyCyberPay"}
+                  </NavLink>
+                </li>
+                <li className="submenu-item">
+                  <NavLink to="pages/terms" className="nav-link">
+                    {showSidebar && "Terms & Condition"}
+                  </NavLink>
+                </li>
+                <li className="submenu-item">
+                  <NavLink to="pages/people" className="nav-link">
+                    {showSidebar && "Privacy Policy"}
+                  </NavLink>
+                </li>
+              
+                <li className="submenu-item">
                   <NavLink to="pages/faqs" className="nav-link">
                     {showSidebar && "FAQs"}
                   </NavLink>

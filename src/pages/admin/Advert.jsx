@@ -50,7 +50,7 @@ const AdminAdvert = () => {
     const payload = {
       banner_id: selected.id,
     };
-    handlePost(`admin/banner/delete`, payload, `application/json`, onSuccess);
+    handlePost(`admin/ads/banner/delete`, payload, `application/json`, onSuccess);
   };
 
   console.log(data?.data?.length);

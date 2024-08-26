@@ -21,6 +21,8 @@ import AdminBreadCrumb from "../pages/admin/BreadCrumb.jsx";
 import AdminStory   from "../pages/admin/Story.jsx"
 import AdminPeople   from "../pages/admin/People.jsx"
 import AdminCareer from "../pages/admin/CareerRoles.jsx";
+import AdminWhyCyberPay from "../pages/admin/WhyCyberPay.jsx";
+import AdminTerms from "../pages/admin/Terms.jsx";
 
 const AdminDashboard = () => {
   const [showSidebar, setShowSidebar] = useState(window.innerWidth >= 650);
@@ -61,6 +63,9 @@ const AdminDashboard = () => {
             <Route path="breadcrumb" element={<AdminBreadCrumb/>} />
             <Route path="pages/story" element={<AdminStory />} />
             <Route path="pages/people" element={<AdminPeople />} />
+            <Route path="pages/whycyberpay" element={<AdminWhyCyberPay />} />
+            <Route path="pages/terms" element={<AdminTerms />} />
+
             <Route path="careers/add" element={<AdminCareer />} />
             <Route path="careers/view" element={<AdminCareer />} />
             <Route

@@ -12,33 +12,43 @@ const Analytics = ({ data }) => {
 
   useEffect(() => {
     if (data) {
-      const months = data.map(item => item.month);
-      const pageViews = data.map(item => item.pageViews);
-      const sessions = data.map(item => item.sessions);
-      const users = data.map(item => item.users);
+      // Extracting data for chart
+      const cities = data.getVisitors.rows.map(row => row.dimensionValues[0].value);
+      const activeUsers = data.getVisitors.rows.map(row => parseInt(row.metricValues[0].value, 10));
+      const bounceRates = data.getBounceRate.rows.map(row => parseFloat(row.metricValues[0].value));
+      const pagePaths = data.getUserBehavior.rows.map(row => row.dimensionValues[0].value);
+      const engagedSessions = data.getUserBehavior.rows.map(row => parseInt(row.metricValues[0].value, 10));
+      const avgSessionDuration = data.getUserBehavior.rows.map(row => parseFloat(row.metricValues[1].value));
 
       setChartData({
-        labels: months,
+        labels: cities, 
         datasets: [
           {
-            label: 'Page Views',
-            data: pageViews,
+            label: 'Active Users',
+            data: activeUsers,
             fill: false,
             borderColor: 'rgba(75,192,192,1)',
             tension: 0.1,
           },
           {
-            label: 'Sessions',
-            data: sessions,
+            label: 'Bounce Rate',
+            data: bounceRates,
             fill: false,
             borderColor: 'rgba(153,102,255,1)',
             tension: 0.1,
           },
           {
-            label: 'Users',
-            data: users,
+            label: 'Engaged Sessions',
+            data: engagedSessions,
             fill: false,
             borderColor: 'rgba(255,159,64,1)',
+            tension: 0.1,
+          },
+          {
+            label: 'Average Session Duration',
+            data: avgSessionDuration,
+            fill: false,
+            borderColor: 'rgba(54,162,235,1)',
             tension: 0.1,
           },
         ],

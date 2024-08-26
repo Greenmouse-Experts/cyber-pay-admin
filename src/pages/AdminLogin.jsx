@@ -41,7 +41,7 @@ const AdminLogin = () => {
           if (res.data.success) {
             toast.success(res.data.message);
             localStorage.setItem("cyber_token", res.data.token);
-            usenavigate("/admin/banner");
+            usenavigate("/admin");
           } else {
             toast.error(res.data.message);
           }

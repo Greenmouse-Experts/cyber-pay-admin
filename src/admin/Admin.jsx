@@ -13,30 +13,32 @@ import Analytics from "./charts/GoogleAnalytics";
 
 const Admin = () => {
   const currentYear = new Date().getFullYear();
-  const { data: user, refetch } = useGetHook(`admin/dashboard?year=${currentYear}`)
+  const { data: user, refetch } = useGetHook(`admin/dashboard?startDate&endDate`)
+
+  console.log(user)
 
   const list = [
     {
-      head: "Total Members",
-      num: user?.data.totalMembers,
+      head: "Total Banners",
+      num: 5,
       Image: img1,
     },
     {
-      head: "Total Subscribers",
-      num: user?.data.totalSubscribers,
+      head: "Total Breadcrumbs",
+      num: 10,
       Image: img2,
     },
     {
-      head: "Total Dues Paid",
-      num: user && formatAsNgnMoney(user?.data.totalDuesPaid),
+      head: "Total Certificate",
+      num: 7,
       Image: img3,
     },
-    {
-      head: "Total Subscription Paid",
-      num: user && formatAsNgnMoney(user?.data.totalSubscriptionPaid),
-      Image:
-        "https://img.freepik.com/premium-vector/sack-money-big-pile-cash-money-icon-illustration-money-bag-flat-icon_385450-362.jpg",
-    },
+    // {
+    //   head: "Total Subscription Paid",
+    //   num: user && formatAsNgnMoney(user?.data.totalSubscriptionPaid),
+    //   Image:
+    //     "https://img.freepik.com/premium-vector/sack-money-big-pile-cash-money-icon-illustration-money-bag-flat-icon_385450-362.jpg",
+    // },
   ];
 
   const dummyAnalyticsData = [
@@ -56,9 +58,9 @@ const Admin = () => {
 
   return (
     <div className="home">
-      {/* <div className="home_top">
+      <div className="home_top">
         {" "}
-        <div className="bg-white p-6 w-[99%] lg:w-[70%]">
+        {/* <div className="bg-white p-6 w-[99%] lg:w-[70%]">
           <div className="head_table">
             <p className="text-xl font-semibold">Recent Members</p>
           </div>
@@ -101,7 +103,7 @@ const Admin = () => {
             </tbody>
           </table>
           </div>
-        </div>
+        </div> */}
         <div className="top_right">
           {list.map((item) => (
             <div className="">
@@ -112,20 +114,20 @@ const Admin = () => {
             </div>
           ))}
         </div>
-      </div> */}
-      <div className="home_bottom">
+      </div>
+      <div className="home_bottom mt-32">
         <div className="l">
           <div className="line">
             <div className="flex justify-between mb-4">
               <h2 className="font-semibold text-xl">Analytics</h2>
-              <button className="flex items-center gap-x-2 bg-blue-900 text-white px-2 py-1 rounded-lg">
-                Monthly (2023){" "}
+              {/* <button className="flex items-center gap-x-2 bg-blue-900 text-white px-2 py-1 rounded-lg">
+                Monthly (2024){" "}
                 <span>
                   <IoIosArrowDown />
                 </span>
-              </button>
+              </button> */}
             </div>
-            {dummyAnalyticsData && <Analytics data={dummyAnalyticsData} />}
+            {user && <Analytics data={user?.data} />}
           </div>
         </div>
         {/* <div className="b">

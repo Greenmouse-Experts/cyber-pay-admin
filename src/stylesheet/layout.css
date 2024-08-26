@@ -41,6 +41,7 @@
   background: #f6f7fb;
   padding: 1rem;
   min-height: 100vh !important;
+  padding-left: 3rem;
 }
 .home {
   margin: 1rem 1.5rem;
@@ -161,14 +162,14 @@ td {
   background: white;
   padding: 1rem;
   border-radius: 10px;
+  width:100%;
 }
 ._text p {
   padding-bottom: 0.8rem;
 }
 .top_right {
-  width: 34%;
+  width: 100%;
   display: flex;
-  flex-direction: column;
   gap: 1.2rem;
   justify-content: space-between;
   height: inherit;
