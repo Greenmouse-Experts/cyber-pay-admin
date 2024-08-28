@@ -23,6 +23,8 @@ import AdminPeople   from "../pages/admin/People.jsx"
 import AdminCareer from "../pages/admin/CareerRoles.jsx";
 import AdminWhyCyberPay from "../pages/admin/WhyCyberPay.jsx";
 import AdminTerms from "../pages/admin/Terms.jsx";
+import SubAdmin from "../pages/admin/SubAdmin.jsx";
+import AdminAbout from "../pages/admin/About.jsx";
 
 const AdminDashboard = () => {
   const [showSidebar, setShowSidebar] = useState(window.innerWidth >= 650);
@@ -30,10 +32,6 @@ const AdminDashboard = () => {
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
-
-  const { data, isLoading } = useGetHook("admin/count/unread/notifications");
-
-  console.log(data);
 
   return (
     <div className="layout">
@@ -43,8 +41,8 @@ const AdminDashboard = () => {
       <div className={showSidebar ? "components" : "close-side"}>
         <div className="top_admin_nav">
           <Topnav
-            data={data?.data}
-            isLoading={isLoading}
+         
+           
             setShowSidebar={setShowSidebar}
             showSidebar={showSidebar}
             toggleSidebar={toggleSidebar}
@@ -60,11 +58,13 @@ const AdminDashboard = () => {
             <Route path="certification" element={<AdminCertificate/>} />
             <Route path="advert" element={<AdminAdvert/>} />
             <Route path="contact" element={<AdminContact/>} />
+            <Route path="subadmin" element={<SubAdmin/>} />
             <Route path="breadcrumb" element={<AdminBreadCrumb/>} />
             <Route path="pages/story" element={<AdminStory />} />
             <Route path="pages/people" element={<AdminPeople />} />
             <Route path="pages/whycyberpay" element={<AdminWhyCyberPay />} />
             <Route path="pages/terms" element={<AdminTerms />} />
+            <Route path="pages/about" element={<AdminAbout />} />
 
             <Route path="careers/add" element={<AdminCareer />} />
             <Route path="careers/view" element={<AdminCareer />} />

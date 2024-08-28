@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../image/logo.png";
 import { FiSettings, FiLogOut, FiPhone } from "react-icons/fi";
-import { MdAnnouncement } from "react-icons/md";
+import { MdAnnouncement, MdOutlineAdminPanelSettings } from "react-icons/md";
 import { MdNetworkPing } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { GrAnnounce, GrTransaction } from "react-icons/gr";
@@ -163,7 +163,7 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
                   </NavLink>
                 </li>
                 <li className="submenu-item">
-                  <NavLink to="pages/people" className="nav-link">
+                  <NavLink to="pages/about" className="nav-link">
                     {showSidebar && "About Us"}
                   </NavLink>
                 </li>
@@ -222,14 +222,14 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
               </ul>
             )}
           </li>
-          {/* <li className="nav-item">
-            <NavLink to="/admin/announcements" className="nav-link">
+          <li className="nav-item">
+            <NavLink to="/admin/subadmin" className="nav-link">
               <span className="nav-icon">
-                <MdAnnouncement />
-                {showSidebar && "Announcement"}
+              <MdOutlineAdminPanelSettings />
+                {showSidebar && "Sub Admin"}
               </span>
             </NavLink>
-          </li> */}
+          </li>
           {/* <li className="nav-item">
             <NavLink to="notify" className="nav-link">
               <span className="nav-icon">
