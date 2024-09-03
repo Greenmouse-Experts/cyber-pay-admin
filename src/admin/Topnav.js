@@ -8,15 +8,13 @@ import { Link } from "react-router-dom";
 import useGetHook from "../hook/useGet";
 import { formatDistanceToNow } from "date-fns";
 
-export const Topnav = ({ toggleSidebar, data }) => {
+export const Topnav = ({ toggleSidebar }) => {
   const formatTimeAgo = (timestamp) => {
     const apiDate = new Date(timestamp);
     return formatDistanceToNow(apiDate);
   };
   const [activeDropdown, setActiveDropdown] = useState(false);
-  const { data: datas, isLoading } = useGetHook(
-    "admin/get/all/unread/notifications"
-  );
+ 
   const currentDate = new Date();
 
   const monthNames = [

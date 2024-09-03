@@ -5,7 +5,6 @@ const requestAutorization = () => {
   const token = getLocalToken("cyber_token");
   return `Bearer ${token}`;
 };
-console.log(requestAutorization());
 export const Custom = axios.create({
   baseURL: "https://bripan.greenmouseacademy.com.ng/api/",
   headers: {

@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../image/logo.png";
 import { FiSettings, FiLogOut, FiPhone } from "react-icons/fi";
-import { MdAnnouncement } from "react-icons/md";
+import { MdAnnouncement, MdOutlineAdminPanelSettings } from "react-icons/md";
 import { MdNetworkPing } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { GrAnnounce, GrTransaction } from "react-icons/gr";
+import { GrAnnounce, GrBlog, GrTransaction } from "react-icons/gr";
 import { GoBell } from "react-icons/go";
 import { LuLayoutDashboard } from "react-icons/lu";
 import "../stylesheet/component.css";
@@ -99,14 +99,14 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
               </span>
             </NavLink>
           </li>
-          {/* <li className="nav-item">
-            <NavLink to="/admin/faq" className="nav-link">
+          <li className="nav-item">
+            <NavLink to="/admin/blog" className="nav-link">
               <span className="nav-icon">
-                <FaQuestionCircle />
-                {showSidebar && "Faqs"}
+              <GrBlog />
+                {showSidebar && "Blog"}
               </span>
             </NavLink>
-          </li> */}
+          </li>
           <li className="nav-item">
             <NavLink to="/admin/certification" className="nav-link">
               <span className="nav-icon">
@@ -163,6 +163,27 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
                   </NavLink>
                 </li>
                 <li className="submenu-item">
+                  <NavLink to="pages/about" className="nav-link">
+                    {showSidebar && "About Us"}
+                  </NavLink>
+                </li>
+                <li className="submenu-item">
+                  <NavLink to="pages/whycyberpay" className="nav-link">
+                    {showSidebar && "WhyCyberPay"}
+                  </NavLink>
+                </li>
+                <li className="submenu-item">
+                  <NavLink to="pages/terms" className="nav-link">
+                    {showSidebar && "Terms & Condition"}
+                  </NavLink>
+                </li>
+                <li className="submenu-item">
+                  <NavLink to="pages/policy" className="nav-link">
+                    {showSidebar && "Privacy Policy"}
+                  </NavLink>
+                </li>
+              
+                <li className="submenu-item">
                   <NavLink to="pages/faqs" className="nav-link">
                     {showSidebar && "FAQs"}
                   </NavLink>
@@ -201,14 +222,14 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
               </ul>
             )}
           </li>
-          {/* <li className="nav-item">
-            <NavLink to="/admin/announcements" className="nav-link">
+          <li className="nav-item">
+            <NavLink to="/admin/subadmin" className="nav-link">
               <span className="nav-icon">
-                <MdAnnouncement />
-                {showSidebar && "Announcement"}
+              <MdOutlineAdminPanelSettings />
+                {showSidebar && "Sub Admin"}
               </span>
             </NavLink>
-          </li> */}
+          </li>
           {/* <li className="nav-item">
             <NavLink to="notify" className="nav-link">
               <span className="nav-icon">

@@ -86,9 +86,7 @@ const AdminPeople = () => {
                         {" "}
                        {formatString(item.title, 40)}
                       </h5>
-                      <p className="py-2">
-                        {formatString(item.subtitle, 60)}
-                      </p>
+                      <div className="mt-5"  dangerouslySetInnerHTML={{ __html: formatString(item?.subtitle, 150) }}/>
                      
                     </div>
                   </div>

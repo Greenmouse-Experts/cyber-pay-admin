@@ -21,6 +21,12 @@ import AdminBreadCrumb from "../pages/admin/BreadCrumb.jsx";
 import AdminStory   from "../pages/admin/Story.jsx"
 import AdminPeople   from "../pages/admin/People.jsx"
 import AdminCareer from "../pages/admin/CareerRoles.jsx";
+import AdminWhyCyberPay from "../pages/admin/WhyCyberPay.jsx";
+import AdminTerms from "../pages/admin/Terms.jsx";
+import SubAdmin from "../pages/admin/SubAdmin.jsx";
+import AdminAbout from "../pages/admin/About.jsx";
+import Blogs from "../pages/admin/Blogs.jsx";
+import AdminPolicy from "../pages/admin/Policy.jsx";
 
 const AdminDashboard = () => {
   const [showSidebar, setShowSidebar] = useState(window.innerWidth >= 650);
@@ -28,10 +34,6 @@ const AdminDashboard = () => {
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
-
-  const { data, isLoading } = useGetHook("admin/count/unread/notifications");
-
-  console.log(data);
 
   return (
     <div className="layout">
@@ -41,8 +43,8 @@ const AdminDashboard = () => {
       <div className={showSidebar ? "components" : "close-side"}>
         <div className="top_admin_nav">
           <Topnav
-            data={data?.data}
-            isLoading={isLoading}
+         
+           
             setShowSidebar={setShowSidebar}
             showSidebar={showSidebar}
             toggleSidebar={toggleSidebar}
@@ -52,15 +54,22 @@ const AdminDashboard = () => {
           <Routes>
             <Route path="/" element={<Admin />} />
             <Route path="fellow" element={<Fellow />} />
-            {/* <Route path="associate" element={<Associate />} /> */}
+            <Route path="blog" element={<Blogs />} />
             <Route path="faq" element={<AdminFaq />} />
             <Route path="banner" element={<AdminBanner />} />
             <Route path="certification" element={<AdminCertificate/>} />
             <Route path="advert" element={<AdminAdvert/>} />
             <Route path="contact" element={<AdminContact/>} />
+            <Route path="subadmin" element={<SubAdmin/>} />
+
             <Route path="breadcrumb" element={<AdminBreadCrumb/>} />
             <Route path="pages/story" element={<AdminStory />} />
             <Route path="pages/people" element={<AdminPeople />} />
+            <Route path="pages/whycyberpay" element={<AdminWhyCyberPay />} />
+            <Route path="pages/terms" element={<AdminTerms />} />
+            <Route path="pages/policy" element={<AdminPolicy />} />
+            <Route path="pages/about" element={<AdminAbout />} />
+
             <Route path="careers/add" element={<AdminCareer />} />
             <Route path="careers/view" element={<AdminCareer />} />
             <Route

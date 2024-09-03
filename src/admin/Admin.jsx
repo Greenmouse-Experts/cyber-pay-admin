@@ -9,99 +9,92 @@ import { formatAsNgnMoney } from "../services/helpers";
 import MembersJoined from "./charts/membersJoined";
 import { IoIosArrowDown } from "react-icons/io";
 import Analytics from "./charts/GoogleAnalytics";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 // eslint-disable-next-line
 
 const Admin = () => {
   const currentYear = new Date().getFullYear();
-  const { data: user, refetch } = useGetHook(`admin/dashboard?year=${currentYear}`)
+  const { data, refetch } = useGetHook(`admin/dashboard?startDate&endDate`)
+
 
   const list = [
     {
-      head: "Total Members",
-      num: user?.data.totalMembers,
+      head: "Total Banners",
+      num: 5,
       Image: img1,
     },
     {
-      head: "Total Subscribers",
-      num: user?.data.totalSubscribers,
+      head: "Total Breadcrumbs",
+      num: 10,
       Image: img2,
     },
     {
-      head: "Total Dues Paid",
-      num: user && formatAsNgnMoney(user?.data.totalDuesPaid),
+      head: "Total Certificate",
+      num: 7,
       Image: img3,
     },
-    {
-      head: "Total Subscription Paid",
-      num: user && formatAsNgnMoney(user?.data.totalSubscriptionPaid),
-      Image:
-        "https://img.freepik.com/premium-vector/sack-money-big-pile-cash-money-icon-illustration-money-bag-flat-icon_385450-362.jpg",
-    },
+    // {
+    //   head: "Total Subscription Paid",
+    //   num: user && formatAsNgnMoney(user?.data.totalSubscriptionPaid),
+    //   Image:
+    //     "https://img.freepik.com/premium-vector/sack-money-big-pile-cash-money-icon-illustration-money-bag-flat-icon_385450-362.jpg",
+    // },
   ];
 
-  const dummyAnalyticsData = [
-    { month: 'January', pageViews: 1200, sessions: 800, users: 600 },
-    { month: 'February', pageViews: 1500, sessions: 1000, users: 750 },
-    { month: 'March', pageViews: 1800, sessions: 1200, users: 900 },
-    { month: 'April', pageViews: 2200, sessions: 1600, users: 1200 },
-    { month: 'May', pageViews: 2500, sessions: 1800, users: 1350 },
-    { month: 'June', pageViews: 2700, sessions: 2000, users: 1500 },
-    { month: 'July', pageViews: 3000, sessions: 2200, users: 1650 },
-    { month: 'August', pageViews: 3300, sessions: 2500, users: 1800 },
-    { month: 'September', pageViews: 3600, sessions: 2700, users: 1950 },
-    { month: 'October', pageViews: 3900, sessions: 3000, users: 2100 },
-    { month: 'November', pageViews: 4200, sessions: 3200, users: 2250 },
-    { month: 'December', pageViews: 4500, sessions: 3500, users: 2400 },
-  ];
+  const downloadAsPDF = () => {
+    const doc = new jsPDF();
+  
+    // Adding the title
+    doc.text("Analytics Report", 20, 10);
+  
+    // Adding Total Counts
+    doc.text("Total Banners: " + data?.data?.totalBanners, 20, 20);
+    doc.text("Total Breadcrumbs: " + data?.data?.totalBreadcrumb, 20, 30);
+    doc.text("Total Careers: " + data?.data?.totalCareers, 20, 40);
+    doc.text("Total Contacts: " + data?.data?.totalContacts, 20, 50);
+    doc.text("Total Certifications: " + data?.data?.totalCertification, 20, 60);
+  
+    // Adding Get Visitors Table
+    doc.autoTable({
+      startY: 70,
+      head: [['City', 'Active Users']],
+      body: data?.data?.getVisitors?.rows.map((row) => [
+        row.dimensionValues[0]?.value,
+        row.metricValues[0]?.value,
+      ]),
+    });
+  
+    // Adding Get Bounce Rate Table
+    doc.autoTable({
+      startY: doc.autoTable.previous.finalY + 10, // To position after the previous table
+      head: [['City', 'Bounce Rate']],
+      body: data?.data?.getBounceRate?.rows.map((row) => [
+        row.dimensionValues[0]?.value,
+        row.metricValues[0]?.value,
+      ]),
+    });
+  
+    // Adding Get User Behavior Table
+    doc.autoTable({
+      startY: doc.autoTable.previous.finalY + 10,
+      head: [['Page Path', 'Engaged Sessions', 'Avg. Session Duration']],
+      body: data?.data?.getUserBehavior?.rows.map((row) => [
+        row.dimensionValues[0]?.value,
+        row.metricValues[0]?.value,
+        row.metricValues[1]?.value,
+      ]),
+    });
+  
+    // Save the PDF
+    doc.save("analytics.pdf");
+  };
 
   return (
     <div className="home">
-      {/* <div className="home_top">
+      <div className="home_top">
         {" "}
-        <div className="bg-white p-6 w-[99%] lg:w-[70%]">
-          <div className="head_table">
-            <p className="text-xl font-semibold">Recent Members</p>
-          </div>
-          <div className="w-full overflow-x-auto">
-          <table className="overflow-x-auto">
-            <thead>
-              <tr>
-                <th className="whitespace-nowrap">S/N</th>
-                <th className="whitespace-nowrap">Member Id</th>
-                <th className="whitespace-nowrap">Member Name</th>
-                <th className="whitespace-nowrap">Profession</th>
-                <th className="whitespace-nowrap">Subscription</th>
-                <th className="whitespace-nowrap">Date Registered</th>
-              </tr>
-            </thead>
-            <tbody>
-              {user &&
-                user?.data?.latestFiveMember.map((item, index) => (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{item.membership_id}</td>
-                    <td>
-                      {item.first_name} {item.last_name}
-                    </td>
-                    <td>{item.account_type}</td>
-                    <td>
-                      {item?.isSubscribed === "0" ? (
-                        <span className="px-2 py-1 text-sm bg-orange-100 font-medium rounded-lg">
-                          Unsubscribed
-                        </span>
-                      ) : (
-                        <span className="px-2 py-1 text-sm bg-green-100 font-medium rounded-lg">
-                          Subscribed
-                        </span>
-                      )}
-                    </td>
-                    <td>{dayjs(item.created_at).format('DD-MM-YYYY')}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-          </div>
-        </div>
+       
         <div className="top_right">
           {list.map((item) => (
             <div className="">
@@ -112,28 +105,27 @@ const Admin = () => {
             </div>
           ))}
         </div>
-      </div> */}
-      <div className="home_bottom">
+      </div>
+      <div className="home_bottom mt-32">
         <div className="l">
           <div className="line">
             <div className="flex justify-between mb-4">
               <h2 className="font-semibold text-xl">Analytics</h2>
-              <button className="flex items-center gap-x-2 bg-blue-900 text-white px-2 py-1 rounded-lg">
-                Monthly (2023){" "}
+              {/* <button className="flex items-center gap-x-2 bg-blue-900 text-white px-2 py-1 rounded-lg">
+                Monthly (2024){" "}
                 <span>
                   <IoIosArrowDown />
                 </span>
+              </button> */}
+              <button onClick={downloadAsPDF} className="flex items-center gap-x-2 bg-blue-900 text-white px-2 py-1 rounded-lg">
+                Download Data
+              
               </button>
             </div>
-            {dummyAnalyticsData && <Analytics data={dummyAnalyticsData} />}
+            {data && <Analytics data={data?.data} />}
           </div>
         </div>
-        {/* <div className="b">
-          <div className="bar">
-            <h2 className="font-semibold mb-2">Analytics</h2>{" "}
-            {user && <MembersJoined className="v" data={user?.data?.monthly_members_joined} />}
-          </div>
-        </div> */}
+       
       </div>
     </div>
   );

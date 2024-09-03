@@ -24,8 +24,6 @@ const usePostHook = () => {
             toast.error(value[0]);
           }
         );
-      }else{
-        toast.error("An error occurred while processing your request.");
       }
     }
   }, []);

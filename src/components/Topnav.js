@@ -8,15 +8,13 @@ import useGetHook from "../hook/useGet";
 import { formatDistanceToNow } from "date-fns";
 import { Link } from "react-router-dom";
 
-export const Topnav = ({ toggleSidebar, data }) => {
+export const Topnav = ({ toggleSidebar }) => {
   const formatTimeAgo = (timestamp) => {
     const apiDate = new Date(timestamp);
     return formatDistanceToNow(apiDate);
   };
   const [activeDropdown, setActiveDropdown] = useState(false);
-  const { data: datas, isLoading } = useGetHook(
-    "member/get/all/unread/notifications"
-  );
+ 
 
   const name = localStorage.getItem("fName");
   const currentDate = new Date();
@@ -85,41 +83,7 @@ export const Topnav = ({ toggleSidebar, data }) => {
           <BiSearch />
           <input type="text" placeholder="Search" />
         </div> */}
-        <div onClick={popup} ref={bellIconRef} className="bell">
-          <GoBell />
-          <span>{data}</span>
-          {activeDropdown && (
-            <div className="bell_drop">
-              <div className="add_head">
-                <p>Recent Notification</p>{" "}
-              </div>
-              {datas?.data.length > 0 ? (
-                datas.data.map((item) => (
-                  <div key={item.id}>
-                    <div className="bell_body">
-                      <GoBell />
-                      <div>
-                        <h3>
-                          {item.body} <span>{item.title}</span>
-                        </h3>
-                        <p>{formatTimeAgo(item.created_at)} ago</p>{" "}
-                      </div>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div>
-                  {" "}
-                  <div className="add_head">
-                    <p>Recent Notification</p>{" "}
-                  </div>{" "}
-                  <p className="no_body">No Notifications</p>
-                </div>
-              )}
-              <Link to="notify">View Details</Link>
-            </div>
-          )}
-        </div>
+     
         <img src={user} alt="" />
       </div>
     </div>

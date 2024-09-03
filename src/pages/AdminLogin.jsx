@@ -31,7 +31,7 @@ const AdminLogin = () => {
       });
       setIsLoading(true);
       axios
-        .post("https://cyberpay.greenmouseonline.com/api/admin/login", fd, {
+        .post("https://backend.cyberpay.net.ng/api/admin/login", fd, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -41,7 +41,7 @@ const AdminLogin = () => {
           if (res.data.success) {
             toast.success(res.data.message);
             localStorage.setItem("cyber_token", res.data.token);
-            usenavigate("/admin/banner");
+            usenavigate("/admin");
           } else {
             toast.error(res.data.message);
           }
