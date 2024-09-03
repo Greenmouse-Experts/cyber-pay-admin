@@ -5,7 +5,7 @@ import { FiSettings, FiLogOut, FiPhone } from "react-icons/fi";
 import { MdAnnouncement, MdOutlineAdminPanelSettings } from "react-icons/md";
 import { MdNetworkPing } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { GrAnnounce, GrTransaction } from "react-icons/gr";
+import { GrAnnounce, GrBlog, GrTransaction } from "react-icons/gr";
 import { GoBell } from "react-icons/go";
 import { LuLayoutDashboard } from "react-icons/lu";
 import "../stylesheet/component.css";
@@ -99,14 +99,14 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
               </span>
             </NavLink>
           </li>
-          {/* <li className="nav-item">
-            <NavLink to="/admin/faq" className="nav-link">
+          <li className="nav-item">
+            <NavLink to="/admin/blog" className="nav-link">
               <span className="nav-icon">
-                <FaQuestionCircle />
-                {showSidebar && "Faqs"}
+              <GrBlog />
+                {showSidebar && "Blog"}
               </span>
             </NavLink>
-          </li> */}
+          </li>
           <li className="nav-item">
             <NavLink to="/admin/certification" className="nav-link">
               <span className="nav-icon">
@@ -178,7 +178,7 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
                   </NavLink>
                 </li>
                 <li className="submenu-item">
-                  <NavLink to="pages/people" className="nav-link">
+                  <NavLink to="pages/policy" className="nav-link">
                     {showSidebar && "Privacy Policy"}
                   </NavLink>
                 </li>

@@ -46,7 +46,7 @@ const AddPolicy = ({ close, refetch, item }) => {
     setLoading(true);
     const fd = new FormData();
     fd.append("content", JSON.stringify(content));
-    handlePost(`admin/term/condition`, fd, `multipart/form-data`, onSuccess);
+    handlePost(`admin/privacy/policy`, fd, `multipart/form-data`, onSuccess);
   };
 
   return (
@@ -92,7 +92,7 @@ const AddPolicy = ({ close, refetch, item }) => {
         Submit
       </button>
 
-      <div className="mt-4">
+      <div className="mt-8">
         <button
           type="submit"
           onClick={handleSubmit}
