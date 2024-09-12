@@ -173,6 +173,42 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
                   </NavLink>
                 </li>
                 <li className="submenu-item">
+                  <NavLink to="pages/marketplace" className="nav-link">
+                    {showSidebar && "MarketPlace"}
+                  </NavLink>
+                </li>
+                <li className="submenu-item">
+                  <NavLink to="pages/mobileapp" className="nav-link">
+                    {showSidebar && "MobileApp"}
+                  </NavLink>
+                </li>
+                <li className="submenu-item">
+                  <NavLink to="pages/paymentlink" className="nav-link">
+                    {showSidebar && "PaymentLink"}
+                  </NavLink>
+                </li>
+                <li className="submenu-item">
+                  <NavLink to="pages/ussdsolution" className="nav-link">
+                    {showSidebar && "Ussd Solution"}
+                  </NavLink>
+                </li>
+                <li className="submenu-item">
+                  <NavLink to="pages/bulksms" className="nav-link">
+                    {showSidebar && "Bulk Sms"}
+                  </NavLink>
+                </li>
+                <li className="submenu-item">
+                  <NavLink to="pages/penremit" className="nav-link">
+                    {showSidebar && "Bulk Sms"}
+                  </NavLink>
+                </li>
+
+                <li className="submenu-item">
+                  <NavLink to="pages/directdebit" className="nav-link">
+                    {showSidebar && "Direct Debit"}
+                  </NavLink>
+                </li>
+                <li className="submenu-item">
                   <NavLink to="pages/terms" className="nav-link">
                     {showSidebar && "Terms & Condition"}
                   </NavLink>
