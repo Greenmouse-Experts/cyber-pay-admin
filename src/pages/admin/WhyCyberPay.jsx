@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import ViewCertificate from "../../admin/certificate/ViewCertificate";
 
 import EditAdvert from "../../admin/Advert/EditAdvert";
-import AddContact from "../../admin/Contact/AddContact";
 import AddWhyCyberPay from "../../admin/WhyCyberPay/AddWhyCyberPay";
 
 const AdminWhyCyberPay = () => {
