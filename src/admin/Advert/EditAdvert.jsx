@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import usePostHook from "../../hook/usePost";
 
 const EditAdvert = ({ item, refetch, close }) => {
   const [loading, setLoading] = useState(false);
-
   const [image, setImage] = useState();
+  const [scheduledAt, setScheduledAt] = useState(""); // state for scheduled_at
+
+  // Pre-populate the scheduled_at field if available
+  useEffect(() => {
+    if (item?.scheduled_at) {
+      setScheduledAt(item.scheduled_at);
+    }
+  }, [item]);
+
   const handleImage = (e) => {
     setImage(e.target.files[0]);
   };
+
   const { handlePost } = usePostHook();
   const onSuccess = () => {
     setLoading(false);
@@ -16,14 +25,16 @@ const EditAdvert = ({ item, refetch, close }) => {
     toast.success("Ads Updated successfully");
     close();
   };
+
   const handleSubmit = async () => {
     setLoading(true);
     const fd = new FormData();
-  
     fd.append("banner_id", item.id);
     if (image) {
       fd.append("image", image);
     }
+    fd.append("scheduled_at", scheduledAt); // append scheduled_at to FormData
+
     handlePost(
       `admin/ads/banner/update`,
       fd,
@@ -31,13 +42,14 @@ const EditAdvert = ({ item, refetch, close }) => {
       onSuccess
     );
   };
+
   return (
     <>
-      
-      
       <div className="mt-4">
         <img src={item.image} alt="image" className="w-24" />
-        <label className="text-lg font-medium w-full">Ads Image <span className="text-sm">(less than 1mb)</span></label>
+        <label className="text-lg font-medium w-full">
+          Ads Image <span className="text-sm">(less than 1mb)</span>
+        </label>
         <input
           type="file"
           accept="image/*"
@@ -45,6 +57,17 @@ const EditAdvert = ({ item, refetch, close }) => {
           className="border border-gray-400 w-full mt-2 p-2 rounded"
         />
       </div>
+
+      <div className="mt-4">
+        <label className="text-lg font-medium w-full">Schedule At</label>
+        <input
+          type="datetime-local"
+          value={scheduledAt}
+          onChange={(e) => setScheduledAt(e.target.value)}
+          className="border border-gray-400 w-full mt-2 p-2 rounded"
+        />
+      </div>
+
       <div className="mt-8">
         <button
           type="submit"

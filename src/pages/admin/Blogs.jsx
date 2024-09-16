@@ -11,6 +11,7 @@ import AddBlog from "../../admin/blog/AddBlog";
 import EditBlog from "../../admin/blog/EditBlog";
 import usePostHook from "../../hook/usePost";
 import ReusableModal from "../../components/ReusableModal";
+import { formatDateTime } from "../../services/helpers";
 
 
 const Blogs = () => {
@@ -109,7 +110,7 @@ const Blogs = () => {
                         scope="col"
                         className="px-6 lg:px-10 align-middle py-3 fs-500 whitespace-nowrap text-left"
                       >
-                        Created at
+                       Schedule at
                       </th>
                       <th
                         scope="col"
@@ -142,7 +143,7 @@ const Blogs = () => {
                           <p>{item.message}</p>
                         </td> */}
                         <td className="align-middle fs-500 whitespace-nowrap px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
-                          {dayjs(item.created_at).format("DD/MM/YYYY")}
+                        {formatDateTime(item.scheduled_at)}
                         </td>
                         <td className="align-middle fs-500 whitespace-nowrap px-6 lg:px-10 py-4 text-left border-b border-[#CECECE]">
                           <div className="flex gap-x-3">

@@ -72,7 +72,7 @@ const AddDirectDebit = ({ close, refetch, item }) => {
           theme="snow"
           value={description}
           onChange={setDescription}
-          className="h-32"
+        
         />
       </div>
 
