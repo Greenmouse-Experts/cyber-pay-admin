@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const AddPenRemit = ({ close, refetch, item }) => {
+const AddPayment = ({ close, refetch, item }) => {
   const [loading, setLoading] = useState(false);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
@@ -64,7 +64,7 @@ const AddPenRemit = ({ close, refetch, item }) => {
     // Append additional fields
     fd.append("setContent", JSON.stringify(setFirstContent));
 
-    handlePost(`admin/pen/remit`, fd, `multipart/form-data`, onSuccess);
+    handlePost(`admin/payment`, fd, `multipart/form-data`, onSuccess);
   };
 
   return (
@@ -87,7 +87,7 @@ const AddPenRemit = ({ close, refetch, item }) => {
           theme="snow"
           value={description}
           onChange={setDescription}
-        
+          
         />
       </div>
 
@@ -97,7 +97,7 @@ const AddPenRemit = ({ close, refetch, item }) => {
         {setFirstContent &&
           setFirstContent.map((content, index) => (
             <div key={index} className="mt-2">
-              <textarea
+              {/* <textarea
                 type="text"
                 placeholder="Title"
                 value={content.title}
@@ -105,7 +105,7 @@ const AddPenRemit = ({ close, refetch, item }) => {
                   handleFirstContentChange(index, "title", e.target.value)
                 }
                 className="border border-gray-400 w-full p-2 rounded mb-2"
-              />
+              /> */}
               <ReactQuill
                 theme="snow"
                 value={content.description}
@@ -142,4 +142,4 @@ const AddPenRemit = ({ close, refetch, item }) => {
   );
 };
 
-export default AddPenRemit;
+export default AddPayment;

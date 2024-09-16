@@ -199,7 +199,18 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
                 </li>
                 <li className="submenu-item">
                   <NavLink to="pages/penremit" className="nav-link">
-                    {showSidebar && "Bulk Sms"}
+                    {showSidebar && "Pen Remit"}
+                  </NavLink>
+                </li>
+                <li className="submenu-item">
+                  <NavLink to="pages/payment" className="nav-link">
+                    {showSidebar && "Payment"}
+                  </NavLink>
+                </li>
+
+                <li className="submenu-item">
+                  <NavLink to="pages/disbursement" className="nav-link">
+                    {showSidebar && "Disbursement"}
                   </NavLink>
                 </li>
 
@@ -250,11 +261,11 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
                     {showSidebar && "Add Careers"}
                   </NavLink>
                 </li>
-                <li className="submenu-item">
+                {/* <li className="submenu-item">
                   <NavLink to="careers/view" className="nav-link">
                     {showSidebar && "View Applicants"}
                   </NavLink>
-                </li>
+                </li> */}
               </ul>
             )}
           </li>

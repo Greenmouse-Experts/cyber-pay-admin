@@ -17,9 +17,10 @@ const ViewStory = ({ item, openEdit }) => {
       <div className="max-h-[500px] overflow-y-auto mb-2 no-scrollbar">
         
         <h5 className="mt-5 font-semibold">{item.title}</h5>
-        <p>
-        {item.subtitle}
-        </p>
+        <div dangerouslySetInnerHTML={{ __html: item?.subtitle }}>
+
+        </div>
+       
       </div>
     </>
   );

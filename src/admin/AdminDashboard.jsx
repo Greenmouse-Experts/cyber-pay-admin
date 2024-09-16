@@ -34,6 +34,9 @@ import AdminUssdSolution from "../pages/admin/UssdSolution.jsx";
 import AdminDirectDebit from "../pages/admin/DirectDebit.jsx";
 import AdminBulkSms from "../pages/admin/BulkSms.jsx";
 import AddPenRemit from "./PenRemit/AddPenRemit.jsx";
+import AdminPenRemit from "../pages/admin/PenRemit.jsx";
+import AdminPayment from "../pages/admin/Payment.jsx";
+import AdminDisbursement from "../pages/admin/Disbursement.jsx";
 
 const AdminDashboard = () => {
   const [showSidebar, setShowSidebar] = useState(window.innerWidth >= 650);
@@ -62,7 +65,7 @@ const AdminDashboard = () => {
             <Route path="/" element={<Admin />} />
             <Route path="fellow" element={<Fellow />} />
             <Route path="blog" element={<Blogs />} />
-            <Route path="faq" element={<AdminFaq />} />
+            <Route path="pages/faqs" element={<AdminFaq />} />
             <Route path="banner" element={<AdminBanner />} />
             <Route path="certification" element={<AdminCertificate/>} />
             <Route path="advert" element={<AdminAdvert/>} />
@@ -82,7 +85,9 @@ const AdminDashboard = () => {
             <Route path="pages/ussdsolution" element={<AdminUssdSolution />} />
             <Route path="pages/directdebit" element={<AdminDirectDebit />} />
             <Route path="pages/bulksms" element={<AdminBulkSms />} />
-            <Route path="pages/penremit" element={<AddPenRemit/>} />
+            <Route path="pages/penremit" element={<AdminPenRemit/>} />
+            <Route path="pages/payment" element={<AdminPayment/>} />
+            <Route path="pages/disbursement" element={<AdminDisbursement />} />
             <Route path="careers/add" element={<AdminCareer />} />
             <Route path="careers/view" element={<AdminCareer />} />
             <Route

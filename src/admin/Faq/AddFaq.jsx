@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import usePostHook from "../../hook/usePost";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const AddFaqModal = ({ close, refetch }) => {
   const [loading, setLoading] = useState(false);
   const [type, setType] = useState("");
   const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
+  const [answer, setAnswer] = useState(""); // state for ReactQuill's answer field
   const { handlePost } = usePostHook();
 
   const onSuccess = () => {
@@ -26,7 +28,7 @@ const AddFaqModal = ({ close, refetch }) => {
     const fd = new FormData();
     fd.append("type", type);
     fd.append("question", question);
-    fd.append("answer", answer);
+    fd.append("answer", answer); // append the Quill answer content to FormData
     handlePost(`admin/faqs/post`, fd, `multipart/form-data`, onSuccess);
   };
 
@@ -69,10 +71,12 @@ const AddFaqModal = ({ close, refetch }) => {
       </div>
       <div className="mt-4">
         <label className="text-lg font-medium">Answer</label>
-        <textarea
-          type="text"
-          className="border border-gray-400 w-full mt-2 p-2 rounded"
-          onChange={(e) => setAnswer(e.target.value)}
+        {/* ReactQuill for the answer field */}
+        <ReactQuill
+          theme="snow"
+          value={answer}
+          onChange={setAnswer} // update state on change
+          
         />
       </div>
       <div className="mt-8">

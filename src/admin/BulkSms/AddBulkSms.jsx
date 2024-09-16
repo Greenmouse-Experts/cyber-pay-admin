@@ -22,8 +22,8 @@ const AddBulkSms = ({ close, refetch, item }) => {
     if (item) {
       setDescription(item.setDescription || "");
       setImagePreview(item.setImage || "");
-      setSetFirstContent(JSON.parse(item.setFirstContent ) || [{ question: "", answer: "" }]);
-      setSetSecondContent( JSON.parse(item.setSecondContent) || [{ title: "", description: "" }]);
+      setSetFirstContent(JSON.parse(item.setFirstContent) || [{ question: "", answer: "" }]);
+      setSetSecondContent(JSON.parse(item.setSecondContent) || [{ title: "", description: "" }]);
     }
   }, [item]);
 
@@ -51,6 +51,18 @@ const AddBulkSms = ({ close, refetch, item }) => {
     setSetSecondContent([...setSecondContent, { title: "", description: "" }]);
   };
 
+  // Remove First Content
+  const removeFirstContent = (index) => {
+    const updatedContent = setFirstContent.filter((_, i) => i !== index);
+    setSetFirstContent(updatedContent);
+  };
+
+  // Remove Second Content
+  const removeSecondContent = (index) => {
+    const updatedContent = setSecondContent.filter((_, i) => i !== index);
+    setSetSecondContent(updatedContent);
+  };
+
   const { handlePost } = usePostHook();
 
   const onSuccess = () => {
@@ -76,8 +88,6 @@ const AddBulkSms = ({ close, refetch, item }) => {
     handlePost(`admin/bulk/sms`, fd, `multipart/form-data`, onSuccess);
   };
 
-  console.log(setFirstContent)
-
   return (
     <>
       <div>
@@ -98,32 +108,45 @@ const AddBulkSms = ({ close, refetch, item }) => {
           theme="snow"
           value={description}
           onChange={setDescription}
-          className="h-32"
+      
         />
       </div>
 
       {/* First Content Section */}
       <div className="mt-4">
         <label className="text-lg font-medium">First Content</label>
-        { setFirstContent && setFirstContent?.map((content, index) => (
+        {setFirstContent.map((content, index) => (
           <div key={index} className="mt-2">
             <input
               type="text"
               placeholder="Question"
               value={content.question}
-              onChange={(e) => handleFirstContentChange(index, "question", e.target.value)}
+              onChange={(e) =>
+                handleFirstContentChange(index, "question", e.target.value)
+              }
               className="border border-gray-400 w-full p-2 rounded mb-2"
             />
             <input
               type="text"
               placeholder="Answer"
               value={content.answer}
-              onChange={(e) => handleFirstContentChange(index, "answer", e.target.value)}
+              onChange={(e) =>
+                handleFirstContentChange(index, "answer", e.target.value)
+              }
               className="border border-gray-400 w-full p-2 rounded"
             />
+            <button
+              onClick={() => removeFirstContent(index)}
+              className="mt-2 bg-red-500 text-white p-2 rounded"
+            >
+              Remove
+            </button>
           </div>
         ))}
-        <button onClick={addFirstContent} className="mt-2 bg-gray-300 p-2 rounded">
+        <button
+          onClick={addFirstContent}
+          className="mt-2 bg-gray-300 p-2 rounded"
+        >
           Add First Content
         </button>
       </div>
@@ -137,19 +160,32 @@ const AddBulkSms = ({ close, refetch, item }) => {
               type="text"
               placeholder="Title"
               value={content.title}
-              onChange={(e) => handleSecondContentChange(index, "title", e.target.value)}
+              onChange={(e) =>
+                handleSecondContentChange(index, "title", e.target.value)
+              }
               className="border border-gray-400 w-full p-2 rounded mb-2"
             />
             <input
               type="text"
               placeholder="Description"
               value={content.description}
-              onChange={(e) => handleSecondContentChange(index, "description", e.target.value)}
+              onChange={(e) =>
+                handleSecondContentChange(index, "description", e.target.value)
+              }
               className="border border-gray-400 w-full p-2 rounded"
             />
+            <button
+              onClick={() => removeSecondContent(index)}
+              className="mt-2 bg-red-500 text-white p-2 rounded"
+            >
+              Remove
+            </button>
           </div>
         ))}
-        <button onClick={addSecondContent} className="mt-2 bg-gray-300 p-2 rounded">
+        <button
+          onClick={addSecondContent}
+          className="mt-2 bg-gray-300 p-2 rounded"
+        >
           Add Second Content
         </button>
       </div>
