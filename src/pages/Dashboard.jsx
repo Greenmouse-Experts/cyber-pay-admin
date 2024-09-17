@@ -21,7 +21,7 @@ const Dashboard = () => {
     setShowSidebar(!showSidebar);
   };
 
-  const { data, isLoading } = useGetHook("member/count/unread/notifications");
+
   
   useEffect(() => {
     if (sub === "0") {
@@ -37,8 +37,7 @@ const Dashboard = () => {
       <div className={showSidebar ? "component" : "close-side"}>
         <div className="pl-4">
           <Topnav
-            data={data?.data}
-            isLoading={isLoading}
+            
             setShowSidebar={setShowSidebar}
             showSidebar={showSidebar}
             toggleSidebar={toggleSidebar}
@@ -47,7 +46,6 @@ const Dashboard = () => {
         <div className="pages">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="notify" element={<Notify datas={data?.data} />} />
            
             <Route path="transact" element={<MembersTransactions />} />
             <Route path="settings" element={<MembersSetting />} />

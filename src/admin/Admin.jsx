@@ -17,21 +17,22 @@ const Admin = () => {
   const currentYear = new Date().getFullYear();
   const { data, refetch } = useGetHook(`admin/dashboard?startDate&endDate`)
 
+  console.log(data)
 
   const list = [
     {
       head: "Total Banners",
-      num: 5,
+      num: data?.data?.totalBanners ,
       Image: img1,
     },
     {
       head: "Total Breadcrumbs",
-      num: 10,
+      num: data?.data?.totalBreadcrumb,
       Image: img2,
     },
     {
-      head: "Total Certificate",
-      num: 7,
+      head: "Total Certification",
+      num: data?.data?.totalCertification,
       Image: img3,
     },
     // {
