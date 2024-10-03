@@ -71,7 +71,7 @@ const AddPolicy = ({ close, refetch, item }) => {
               onChange={(newValue) =>
                 handleUpdateField(index, "description", newValue, setContent, content)
               }
-              className="h-32"
+            
             />
           </div>
 

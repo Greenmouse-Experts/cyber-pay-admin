@@ -180,7 +180,9 @@ const AdminFaq = () => {
                         </div>
                         <div>
                           <p className="font-semibold">Answer</p>
-                          <p>{item.answer}</p>
+                         <div  dangerouslySetInnerHTML={{ __html: item?.setDescription }}>
+
+                         </div>
                         </div>
                       </div>
 

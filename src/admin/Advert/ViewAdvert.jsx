@@ -1,7 +1,9 @@
 import React from "react";
 import { MdEdit } from "react-icons/md";
+import { formatDateTime } from "../../services/helpers";
 
 const ViewAdvert = ({ item, openEdit }) => {
+  
   return (
     <>
       <div className="flex justify-end">
@@ -16,6 +18,10 @@ const ViewAdvert = ({ item, openEdit }) => {
       <div className="max-h-[500px] overflow-y-auto mb-2 no-scrollbar">
         <img src={item.image} alt="image" className="w-full" />
         <h5 className="mt-5 font-semibold">{item.title}</h5>
+      </div>
+      <div>
+        <p>Schedule at</p>
+        <p>{formatDateTime(item.scheduled_at)}</p>
       </div>
     </>
   );

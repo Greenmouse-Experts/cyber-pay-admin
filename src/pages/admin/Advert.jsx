@@ -4,7 +4,7 @@ import { TfiAnnouncement } from "react-icons/tfi";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import useGetHook from "../../hook/useGet";
 import useModal from "../../hook/useModal";
-import { formatString } from "../../services/helpers";
+import { formatDateTime, formatString } from "../../services/helpers";
 import dayjs from "dayjs";
 
 import ReusableModal from "../../components/ReusableModal";
@@ -17,6 +17,7 @@ import EditCertificate from "../../admin/certificate/EditCertificate";
 import ViewCertificate from "../../admin/certificate/ViewCertificate";
 import AddAdvert from "../../admin/Advert/AddAdvert";
 import EditAdvert from "../../admin/Advert/EditAdvert";
+import ViewAdvert from "../../admin/Advert/ViewAdvert";
 
 const AdminAdvert = () => {
   const [selected, setSelected] = useState();
@@ -50,7 +51,12 @@ const AdminAdvert = () => {
     const payload = {
       banner_id: selected.id,
     };
-    handlePost(`admin/ads/banner/delete`, payload, `application/json`, onSuccess);
+    handlePost(
+      `admin/ads/banner/delete`,
+      payload,
+      `application/json`,
+      onSuccess
+    );
   };
 
   console.log(data?.data?.length);
@@ -81,9 +87,16 @@ const AdminAdvert = () => {
                 >
                   <div className="flex items-center gap-x-5">
                     <div className="bg-blue-900 py-3 px-4">
-                      <img src={item.image} alt="" className="w-40 h-40 object-cover object-center" />
+                      <img
+                        src={item.image}
+                        alt=""
+                        className="w-40 h-40 object-cover object-center"
+                      />
                     </div>
-                   
+                    <div>
+                      <p>Schedule at</p>
+                      <p>{formatDateTime(item.scheduled_at)}</p>
+                    </div>
                   </div>
                   <div
                     className="pr-6 flex gap-x-2"
@@ -104,7 +117,7 @@ const AdminAdvert = () => {
         <AddAdvert close={() => setShowModal(false)} refetch={refetch} />
       </Modal>
       <View title="View">
-        <ViewCertificate
+        <ViewAdvert
           close={() => setShowModal(false)}
           item={selected}
           openEdit={openEdit}

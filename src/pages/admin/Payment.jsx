@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import useGetHook from "../../hook/useGet";
-import AddPenRemit from "../../admin/PenRemit/AddPenRemit";
+import AddPayment from "../../admin/Payment/AddPayment";
 
-const AdminPenRemit = () => {
-  const { data, loading, refetch } = useGetHook("admin/solution/pen/remit");
+const AdminPayment = () => {
+  const { data, loading, refetch } = useGetHook("admin/solution/payment");
 
   return (
     <>
       <div className="p-6 bg-white min-h-screen m-2">
         <div className="flex items-center justify-between px-4">
-          <p className="text-2xl font-semibold">Pen Remit</p>
+          <p className="text-2xl font-semibold">Payment Processing</p>
         
         </div>
         {!data ? (
           <div>loading</div>
         ) : (
-          <AddPenRemit item={data?.data} refetch={refetch} />
+          <AddPayment item={data?.data} refetch={refetch} />
         )}
       </div>
       
@@ -24,4 +24,4 @@ const AdminPenRemit = () => {
   );
 };
 
-export default AdminPenRemit;
+export default AdminPayment;

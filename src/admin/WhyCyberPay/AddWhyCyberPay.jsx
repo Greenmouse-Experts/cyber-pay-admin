@@ -92,7 +92,7 @@ const AddWhyCyberPay = ({ close, refetch, item }) => {
           theme="snow"
           value={title}
           onChange={setTitle}
-          className="h-32"
+        
         />
       </div>
 
@@ -182,7 +182,7 @@ const AddWhyCyberPay = ({ close, refetch, item }) => {
           theme="snow"
           value={why_us}
           onChange={setWhyUs}
-          className="h-32"
+         
         />
       </div>
 

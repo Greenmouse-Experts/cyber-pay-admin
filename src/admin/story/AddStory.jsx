@@ -47,7 +47,7 @@ const AddStory = ({ close, refetch }) => {
             theme="snow"
             value={subtitle}
             onChange={setSubtitle} 
-            className={"h-32"}
+           
           />
      </div>
       <div className="mt-8">
