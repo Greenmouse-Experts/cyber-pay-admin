@@ -1,7 +1,7 @@
 import "./App.css";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Register from "./pages/Register";
@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <ToastContainer></ToastContainer>
-      <BrowserRouter>
+      <Router basename="/admin" >
         <Routes>
           <Route path="/" index element={<AdminLogin />} />
           <Route path="/login" element={<AdminLogin />} />
@@ -27,7 +27,7 @@ function App() {
             <Route path="/dashboard/*" element={<Dashboard />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
