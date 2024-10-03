@@ -31,8 +31,8 @@ const Admin = () => {
       Image: img2,
     },
     {
-      head: "Total Certification",
-      num: data?.data?.totalCertification,
+      head: "Total Certification License",
+      num: data?.data?.totalCertificationLicense,
       Image: img3,
     },
     // {
